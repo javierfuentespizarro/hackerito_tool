@@ -21,7 +21,7 @@ function banner() {
 	printf "\e[1;35m[01]\e[0m \e[1;33mFalta definir\e[0m \n"
 	printf "\e[1;35m[02]\e[0m \e[1;33mFalta definir\e[0m \n"
 	printf "\e[1;35m[03]\e[0m \e[1;33mFalta definir\e[0m \n"
-	printf "\e[1;35m[04]\e[0m \e[1;33mWindows Reverse Shell\e[0m \n"
+	printf "\e[1;35m[04]\e[0m \e[1;33mIniciar Openvas\e[0m \n"
 	printf "\e[1;35m[05]\e[0m \e[1;33mIniciar Nessus\e[0m \n"
 	printf "\e[1;35m[06]\e[0m \e[1;33mEmail Spoofing\e[0m \n"
 	printf "\n"
@@ -46,6 +46,16 @@ function fexit() {
         exit 1
 }
 
+#Funcion Iniciar Openvas
+
+function openvas () {
+	printf "Iniciando Openvas.\n"
+	service openvas-scanner start
+	printf "Iniciando Openvas..\n"
+	service openvas-manager start
+	printf "Iniciando Openvas...\n"
+}
+
 #Funcion Iniciar Nessus
 
 function nessus() {
@@ -59,6 +69,7 @@ function nessus() {
 
 #Función 6 - Email Spoofing
 
+#Funcion inputs basicos del spoof
 function spoofargs() {
 
 	read -p $'\e[1;92mIntroduce el nombre a suplantar:\e[0m ' nombre
@@ -110,7 +121,7 @@ do
 			#Indicar funcion
 			wait;;
 		4)
-			#Indicar funcion
+			openvas
 			wait;;
 		5)
 			nessus
@@ -124,4 +135,3 @@ do
 			fexit
 	esac
 done
-
