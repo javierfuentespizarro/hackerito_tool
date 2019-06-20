@@ -76,9 +76,7 @@ function spoofargs() {
         read -p $'\e[1;92mIntroduce el correo a suplantar:\e[0m ' spoof
         read -p $'\e[1;92mIntroduce el asunto del correo:\e[0m ' asunto
         read -p $'\e[1;92mIntroduce el nombre del fichero que se enviara como cuerpo:\e[0m ' fichero
-	#Añadimos las comillas
-	nombre='"'$nombre'"'
-	asunto='"'$asunto'"'
+
 }
 
 function emailspoof() {
@@ -92,12 +90,11 @@ function emailspoof() {
 	if [[ $multiples = 'no' ]] || [[ $multiples = 'n' ]];
 	then
 		read -p $'\e[1;92mIntroduce correo al que enviar el mail falso:\e[0m ' destinatario
-		python /root/Herramientas/SimpleEmailSpoofer/SimpleEmailSpoofer.py -e $fichero -t $destinatario -f $spoof -n $nombre -j $asunto
-		echo python /root/Herramientas/SimpleEmailSpoofer/SimpleEmailSpoofer.py -e $fichero -t $destinatario -f $spoof -n $nombre -j $asunto
+		python /root/Herramientas/SimpleEmailSpoofer/SimpleEmailSpoofer.py -e $fichero -t $destinatario -f $spoof -n "$nombre" -j "$asunto"
+
 	else
 	  	read -p $'\e[1;92mIntroduce el nombre del fichero con los destinatarios: \e[0m ' destinatarios
-		python /root/Herramientas/SimpleEmailSpoofer/SimpleEmailSpoofer.py -e $fichero -a $destinatarios -f $spoof -n $nombre -j $asunto
-		echo /root/Herramientas/SimpleEmailSpoofer/SimpleEmailSpoofer.py -e $fichero -a $destinatarios -f $spoof -n $nombre -j $asunto
+		python /root/Herramientas/SimpleEmailSpoofer/SimpleEmailSpoofer.py -e $fichero -a $destinatarios -f $spoof -n "$nombre" -j "$asunto"
 	fi
 
 
