@@ -1,5 +1,5 @@
 #!/bin/bash 
-#Hackerito Tool v1 Coded by Hackerito Team
+#Hackerito Tool v2 Coded by Hackerito Team
 
 #Funciones
 
