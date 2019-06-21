@@ -20,7 +20,7 @@ function banner() {
 
 	printf "\e[1;35m[01]\e[0m \e[1;33mFalta definir\e[0m \n"
 	printf "\e[1;35m[02]\e[0m \e[1;33mFalta definir\e[0m \n"
-	printf "\e[1;35m[03]\e[0m \e[1;33mFalta definir\e[0m \n"
+	printf "\e[1;35m[03]\e[0m \e[1;33mEscaneos Nmap\e[0m \n"
 	printf "\e[1;35m[04]\e[0m \e[1;33mIniciar Openvas\e[0m \n"
 	printf "\e[1;35m[05]\e[0m \e[1;33mIniciar Nessus\e[0m \n"
 	printf "\e[1;35m[06]\e[0m \e[1;33mEmail Spoofing\e[0m \n"
@@ -44,6 +44,32 @@ function fexit() {
         printf "\e[1;31mGoodbye hackerito! \e[0m \n"
         printf "\n"
         exit 1
+}
+
+#Funcion Nmap - Diversos Tipos de scaneos
+
+function nmap() {
+	clear
+	printf "\e[1;35m[01]\e[0m \e[1;33mEscaneo Rapido y básico\e[0m \n"
+        printf "\e[1;35m[02]\e[0m \e[1;33mEscaneo silencioso\e[0m \n"
+        printf "\e[1;35m[03]\e[0m \e[1;33mEscaneo Full\e[0m \n"
+	read -p $'\e[1;92mIntroduce el tipo de escaneo:\e[0m ' scan_type
+
+	if [[ $scan_type = '1' ]];
+	then
+		clear
+		printf "\e[1;33mEscaneos Nmap\e[0m \n"
+		printf "\e[1;33mEscaneo Rapido y básico\e[0m \n"
+	elif [[ $scan_type = '2' ]];
+	then
+		clear
+		printf "\e[1;33mEscaneo Silencioso\e[0m \n"
+	elif [[ $scan_type = '3' ]];
+	then
+		clear
+		printf "\e[1;33mEscaneo Full\e[0m \n"
+	fi
+
 }
 
 #Funcion Iniciar Openvas
@@ -76,7 +102,9 @@ function spoofargs() {
         read -p $'\e[1;92mIntroduce el correo a suplantar:\e[0m ' spoof
         read -p $'\e[1;92mIntroduce el asunto del correo:\e[0m ' asunto
         read -p $'\e[1;92mIntroduce el nombre del fichero que se enviara como cuerpo:\e[0m ' fichero
-
+	#Añadimos las comillas
+	nombre='"'$nombre'"'
+	asunto='"'$asunto'"'
 }
 
 function emailspoof() {
@@ -91,7 +119,6 @@ function emailspoof() {
 	then
 		read -p $'\e[1;92mIntroduce correo al que enviar el mail falso:\e[0m ' destinatario
 		python /root/Herramientas/SimpleEmailSpoofer/SimpleEmailSpoofer.py -e $fichero -t $destinatario -f $spoof -n "$nombre" -j "$asunto"
-
 	else
 	  	read -p $'\e[1;92mIntroduce el nombre del fichero con los destinatarios: \e[0m ' destinatarios
 		python /root/Herramientas/SimpleEmailSpoofer/SimpleEmailSpoofer.py -e $fichero -a $destinatarios -f $spoof -n "$nombre" -j "$asunto"
@@ -114,8 +141,8 @@ do
 		2)
 			#Indicar funcion
 			wait;;
-		3)	
-			#Indicar funcion
+		3)
+			nmap
 			wait;;
 		4)
 			openvas
